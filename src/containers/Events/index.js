@@ -9,23 +9,33 @@ import "./style.css";
 
 const PER_PAGE = 9;
 
+function filterByType(events,type){
+  return events.filter((event) =>{
+    if (event.type === type)
+      {
+    return true;
+  }
+  return false;
+  })
+} 
+
+
 const EventList = () => {
   const { data, error } = useData();
-  const [type, setType] = useState();
+  const [type, setType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const filteredEvents = (
-    (!type
-      ? data?.events
-      : data?.events) || []
-  ).filter((event, index) => {
-    if (
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
-      return true;
+
+  const filteredEvents = ((!type ? data?.events : filterByType(data?.events, type)) || []).filter(
+    (event, index) => {
+      if (
+        (currentPage - 1) * PER_PAGE <= index &&
+        PER_PAGE * currentPage > index
+      ) {
+        return true;
+      }
+      return false;
     }
-    return false;
-  });
+  );
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
