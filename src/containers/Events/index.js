@@ -22,7 +22,7 @@ function filterByType(events,type){
 
 const EventList = () => {
   const { data, error } = useData();
-  const [type, setType] = useState(null);
+  const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredEvents = ((!type ? data?.events : filterByType(data?.events, type)) || []).filter(
