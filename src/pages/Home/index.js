@@ -113,7 +113,7 @@ const Page = () => {
         </div>
       </main>
       <footer data-testid="footer" className="row">
-        <div className="col presta">
+        <div className="col presta" data-testid="latest-event">
           <h3>Notre dernière prestation</h3>
           <EventCard
             imageSrc={last?.cover}
