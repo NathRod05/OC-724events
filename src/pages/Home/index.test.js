@@ -1,5 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
+import {
+  toBeInTheDocument,
+  toBeInTheDOM,
+} from "@testing-library/jest-dom/dist/matchers";
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -30,11 +34,15 @@ describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     // to implement
   });
-  it("a list a people is displayed", () => {
-    // to implement
+  it("a list a people is displayed", async () => {
+    render(<Home />);
+    await screen.findByText("Jean-baptiste");
+    await screen.findByText("Directeur marketing");
   });
   it("a footer is displayed", () => {
-    // to implement
+    render(<Home />);
+    const footer = screen.getByTestId("footer");
+    expect(footer).toBeInTheDocument();
   });
   it("an event card, with the last event, is displayed", () => {
     // to implement
