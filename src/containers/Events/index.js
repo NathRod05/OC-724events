@@ -9,33 +9,31 @@ import "./style.css";
 
 const PER_PAGE = 9;
 
-function filterByType(events,type){
-  return events.filter((event) =>{
-    if (event.type === type)
-      {
-    return true;
-  }
-  return false;
-  })
-} 
-
+function filterByType(events, type) {
+  return events.filter((event) => {
+    if (event.type === type) {
+      return true;
+    }
+    return false;
+  });
+}
 
 const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredEvents = ((!type ? data?.events : filterByType(data?.events, type)) || []).filter(
-    (event, index) => {
-      if (
-        (currentPage - 1) * PER_PAGE <= index &&
-        PER_PAGE * currentPage > index
-      ) {
-        return true;
-      }
-      return false;
+  const filteredEvents = (
+    (!type ? data?.events : filterByType(data?.events, type)) || []
+  ).filter((event, index) => {
+    if (
+      (currentPage - 1) * PER_PAGE <= index &&
+      PER_PAGE * currentPage > index
+    ) {
+      return true;
     }
-  );
+    return false;
+  });
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
@@ -54,7 +52,7 @@ const EventList = () => {
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
           />
-          <div id="events" className="ListContainer">
+          <div id="events" className="ListContainer" data-testid="eventList">
             {filteredEvents.map((event) => (
               <Modal key={event.id} Content={<ModalEvent event={event} />}>
                 {({ setIsOpened }) => (

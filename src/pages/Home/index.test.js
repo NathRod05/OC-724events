@@ -28,7 +28,9 @@ describe("When Form is created", () => {
 
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
-    // to implement
+    render(<Home />);
+    const eventList = screen.getByTestId("eventList");
+    expect(eventList).toBeInTheDocument();
   });
   it("a list a people is displayed", async () => {
     render(<Home />);
@@ -42,7 +44,7 @@ describe("When a page is created", () => {
   });
   it("an event card, with the last event, is displayed", async () => {
     render(<Home />);
-    //   screen.findByTestId("latest-event");
-    //   screen.findByText(last?.title);
+    const eventCard = screen.getByTestId("latest-event");
+    expect(eventCard).toBeInTheDocument();
   });
 });

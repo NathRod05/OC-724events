@@ -116,11 +116,11 @@ const Page = () => {
         <div className="col presta" data-testid="latest-event">
           <h3>Notre dernière prestation</h3>
           <EventCard
-            imageSrc={last?.cover}
-            title={last?.title}
+            imageSrc={last?.cover || ""}
+            title={last?.title || ""}
             date={new Date(last?.date)}
             small
-            label={last?.type}
+            label={last?.type || ""}
           />
         </div>
         <div className="col contact">
